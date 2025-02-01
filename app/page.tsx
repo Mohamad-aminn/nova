@@ -1,5 +1,3 @@
-import Zibal from "./utils/index.js";
-import ZarinpalCheckout from "./lib/zarinpal.js";
 // var zarinpal = ZarinpalCheckout.create(
 //   "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
 //   false
@@ -17,7 +15,7 @@ import ZarinpalCheckout from "./lib/zarinpal.js";
 //   });
 
 const Home = async () => {
-  return <div className=""></div>;
+  return <div className="">e comerce</div>;
 };
 
 export default Home;
