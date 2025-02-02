@@ -10,6 +10,15 @@
     @apply bg-black text-whiteText;
   }
   .whiteNavbar {
-    @apply bg-transparent text-black;
+    @apply bg-transparent;
+  }
+
+  .pattern {
+    transform: perspective(1500px) rotateX(-80deg);
+    @apply h-[1200px] relative -top-[440px] left-0 w-full bg-black;
+  }
+  .line-rotate {
+    background: linear-gradient(to bottom, #a1a1a1, #000 70%);
+    @apply w-px h-full;
   }
 }

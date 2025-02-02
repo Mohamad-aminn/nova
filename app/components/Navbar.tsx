@@ -32,7 +32,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (y < 120) {
+    if (y < 200) {
       navbar.current?.classList.add("whiteNavbar");
       navbar.current?.classList.remove("blackNavbar");
 
@@ -61,16 +61,14 @@ const Navbar = () => {
   }, [y]);
 
   return (
-    <div ref={navbar} className="navbar">
+    <div ref={navbar} className="navbar z-20">
       <div className="flex items-center justify-between container mx-auto">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5 font-bold">
+          <div className=""> دراپ دون یوزر و منو</div>
           <div>لوگو</div>
-          <div>اسم کمپانی </div>
         </div>
 
-        <div className="items-center gap-4 hidden md:flex">
-          <Link href={"#"}>لینک</Link>
-          <Link href={"#"}>لینک</Link>
+        <div className="items-center gap-8 hidden md:flex font-semibold">
           <Link href={"#"}>لینک</Link>
           <Link href={"#"}>لینک</Link>
           <Link href={"#"}>لینک</Link>

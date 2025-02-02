@@ -1,3 +1,4 @@
+import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 
 const Home = async () => {
@@ -16,6 +17,7 @@ const Home = async () => {
   return (
     <div className="font-vazir min-h-[200vh]">
       <Navbar />
+      <Hero />
     </div>
   );
 };
