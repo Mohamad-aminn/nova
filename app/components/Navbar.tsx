@@ -1,6 +1,7 @@
 "use client";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { useWindowScroll } from "react-use";
 
@@ -23,6 +24,12 @@ const Navbar = () => {
     },
     { dependencies: [visible] }
   );
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", (e) => {
+      console.log(document.visibilityState);
+    });
+  }, []);
 
   useEffect(() => {
     if (y < 120) {
@@ -55,7 +62,24 @@ const Navbar = () => {
 
   return (
     <div ref={navbar} className="navbar">
-      Navbar
+      <div className="flex items-center justify-between container mx-auto">
+        <div className="flex items-center gap-3">
+          <div>لوگو</div>
+          <div>اسم کمپانی </div>
+        </div>
+
+        <div className="items-center gap-4 hidden md:flex">
+          <Link href={"#"}>لینک</Link>
+          <Link href={"#"}>لینک</Link>
+          <Link href={"#"}>لینک</Link>
+          <Link href={"#"}>لینک</Link>
+          <Link href={"#"}>لینک</Link>
+          <Link href={"#"}>لینک</Link>
+          <Link href={"#"}>لینک</Link>
+        </div>
+
+        <div className=" md:hidden">همبرگر</div>
+      </div>
     </div>
   );
 };
