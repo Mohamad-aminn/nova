@@ -2,20 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer {
+  .navbar {
+    @apply w-full text-whiteText p-16 fixed top-0 left-0 rounded-lg bg-black my-4 transition-all duration-200;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  .blackNavbar {
+    @apply bg-black text-whiteText;
+  }
+  .whiteNavbar {
+    @apply bg-transparent text-black;
+  }
 }

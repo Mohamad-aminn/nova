@@ -11,7 +11,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        whiteText: "#ccc",
       },
+    },
+    fontFamily: {
+      vazir: ["var(--font-vazir)"],
     },
   },
   plugins: [],

@@ -1,0 +1,63 @@
+"use client";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import React, { useEffect, useRef, useState } from "react";
+import { useWindowScroll } from "react-use";
+
+const Navbar = () => {
+  const [lastScroll, setLastScroll] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  const navbar = useRef<HTMLDivElement>(null);
+
+  const { y } = useWindowScroll();
+
+  useGSAP(
+    () => {
+      gsap.to(navbar.current, {
+        y: visible ? 0 : -100,
+        opacity: visible ? 1 : 0,
+        duration: 0.2,
+        ease: "power1.inOut",
+      });
+    },
+    { dependencies: [visible] }
+  );
+
+  useEffect(() => {
+    if (y < 120) {
+      navbar.current?.classList.add("whiteNavbar");
+      navbar.current?.classList.remove("blackNavbar");
+
+      // gsap.to(navbar.current, {
+      //   background: "transparent",
+      //   color: "#000",
+      //   duration: 0.4,
+      //   ease: "power1.inOut",
+      // });
+    } else if (lastScroll > y) {
+      setVisible(true);
+      navbar.current?.classList.add("blackNavbar");
+      navbar.current?.classList.remove("whiteNavbar");
+
+      // gsap.to(navbar.current, {
+      //   background: "#000",
+      //   color: "#ccc",
+      //   duration: 0.4,
+      //   ease: "power1.inOut",
+      // });
+    } else if (lastScroll < y) {
+      setVisible(false);
+    }
+
+    setLastScroll(y);
+  }, [y]);
+
+  return (
+    <div ref={navbar} className="navbar">
+      Navbar
+    </div>
+  );
+};
+
+export default Navbar;
