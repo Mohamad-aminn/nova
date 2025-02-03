@@ -12,6 +12,7 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         whiteText: "#ccc",
+        laserCyan: "#39fdf9",
       },
     },
     fontFamily: {

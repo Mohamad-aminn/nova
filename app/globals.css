@@ -18,7 +18,17 @@
     @apply h-[1200px] relative -top-[440px] left-0 w-full bg-black;
   }
   .line-rotate {
-    background: linear-gradient(to bottom, #a1a1a1, #000 70%);
+    background: linear-gradient(to bottom, #39fdfa77, transparent 70%);
     @apply w-px h-full;
+  }
+
+  .hero-radial {
+    @apply h-36 w-[70vw] absolute top-1/2 left-1/2 !translate-x-[-50%];
+    filter: blur(200px);
+    background: #39fdfaa9;
+  }
+
+  .hero-container {
+    @apply absolute top-1/2 left-1/2 !translate-x-[-50%] !translate-y-[-50%] text-whiteText;
   }
 }
