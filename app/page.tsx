@@ -1,5 +1,8 @@
+import { Suspense } from "react";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
+import Trends from "./components/Trends";
+import TrendSkeleton from "./components/skeleton/TrendSkeleton";
 
 const Home = async () => {
   // const { data } = await axios.post(
@@ -18,6 +21,9 @@ const Home = async () => {
     <div className="font-vazir min-h-[200vh]">
       <Navbar />
       <Hero />
+      <Suspense fallback={<TrendSkeleton />}>
+        <Trends />
+      </Suspense>
     </div>
   );
 };

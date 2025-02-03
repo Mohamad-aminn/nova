@@ -13,11 +13,16 @@ export default {
         foreground: "var(--foreground)",
         whiteText: "#ccc",
         laserCyan: "#39fdf9",
+        border: "#1A1A1A",
+        bgDark: "#0A0A0A",
       },
     },
     fontFamily: {
       vazir: ["var(--font-vazir)"],
     },
   },
-  plugins: [],
+  daisyui: {
+    themes: ["dark"],
+  },
+  plugins: [require("daisyui")],
 } satisfies Config;
