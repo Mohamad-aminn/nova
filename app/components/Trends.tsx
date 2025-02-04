@@ -8,7 +8,7 @@ type Commodity = {
 };
 
 const Trends = async () => {
-  const res = await fetch("http://localhost:3000/api/commodity");
+  const res = await fetch("http://localhost:3000/api/product");
   const trendCommodity = await res.json();
 
   console.log(trendCommodity);
