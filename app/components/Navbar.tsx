@@ -26,7 +26,7 @@ const Navbar = () => {
   );
 
   useEffect(() => {
-    document.addEventListener("visibilitychange", (e) => {
+    document.addEventListener("visibilitychange", () => {
       console.log(document.visibilityState);
     });
   }, []);

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import TrendCard from "./TrendCard";
 
 type Commodity = {

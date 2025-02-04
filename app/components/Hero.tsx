@@ -18,7 +18,7 @@ const Hero = () => {
     });
   }, {});
 
-  4 * (6 - 1);
+  // 4 * (6 - 1);
   return (
     <div className="z-10 h-dvh relative bg-black overflow-hidden">
       <div className="pattern">

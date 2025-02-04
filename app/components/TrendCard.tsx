@@ -1,14 +1,6 @@
 import React from "react";
 
-const TrendCard = ({
-  id,
-  title,
-  price,
-}: {
-  id: number;
-  title: string;
-  price: number;
-}) => {
+const TrendCard = ({ title, price }: { title: string; price: number }) => {
   return (
     <div className="border rounded-lg overflow-hidden border-border">
       <div className="size-40">
