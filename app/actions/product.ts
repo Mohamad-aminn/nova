@@ -7,6 +7,11 @@ export type Product = {
   img: string;
   colors: { label: string; color: string }[];
 };
+export type Commodity = {
+  id: number;
+  title: string;
+  price: number;
+};
 
 export const getproducts = async () => {
   try {

@@ -1,15 +1,10 @@
 import React from "react";
 import TrendCard from "./TrendCard";
-import { getproducts } from "../actions/product";
-
-type Commodity = {
-  id: number;
-  title: string;
-  price: number;
-};
+import { Commodity, getproducts } from "../actions/product";
 
 const Trends = async () => {
-  const trendCommodity = await getproducts();
+  const trendCommodity: Commodity[] = await getproducts();
+  console.log(trendCommodity);
 
   return (
     <div className="bg-bgDark border border-border overflow-x-scroll p-4 text-whiteText">
@@ -18,8 +13,8 @@ const Trends = async () => {
           <p>⬅️ کالا های ترند این هفته 🔥</p>
         </div>
         <div className="w-full flex justify-between ">
-          {trendCommodity.map((c: Commodity, i: number) => (
-            <div key={i}>
+          {trendCommodity?.map((c) => (
+            <div key={c.id}>
               <TrendCard {...c} />
             </div>
           ))}
