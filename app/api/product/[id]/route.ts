@@ -1,7 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (params: { params: { id: number } }) => {
+export const GET = async (
+  req: NextRequest,
+  params: { params: { id: number } }
+) => {
   const { id } = params.params;
+
+  console.log(req);
 
   const product = {
     id,
