@@ -8,7 +8,9 @@ type Product = {
   colors: { label: string; color: string }[];
 };
 
-const page = async ({ params: { id } }: { params: { id: string } }) => {
+const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const id = (await params).id;
+
   const product: Product = await fetch(
     `http://localhost:3000/api/product/${id}`
   ).then(async (response) => await response.json());
