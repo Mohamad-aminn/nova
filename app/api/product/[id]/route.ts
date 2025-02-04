@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (
   req: NextRequest,
-  params: { params: { id: number } }
+  { params }: { params: Promise<{ id: number }> }
 ) => {
-  const { id } = params.params;
+  const { id } = await params;
 
   console.log(req);
 
