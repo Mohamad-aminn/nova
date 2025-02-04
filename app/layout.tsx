@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import { Metadata } from "next";
 
 const vazir = localFont({
   src: [
@@ -15,7 +16,10 @@ const vazir = localFont({
   ],
   variable: "--font-vazir",
 });
-
+export const metadata: Metadata = {
+  title: "Nova",
+  description: "e-commerce website",
+};
 export default function RootLayout({
   children,
 }: Readonly<{
