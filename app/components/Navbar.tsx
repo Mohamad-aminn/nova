@@ -32,7 +32,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (y < 200) {
+    if (y < 100) {
       navbar.current?.classList.add("whiteNavbar");
       navbar.current?.classList.remove("blackNavbar");
 
