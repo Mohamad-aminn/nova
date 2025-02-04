@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const GET = (res: NextRequest) => {
+export const GET = () => {
   return NextResponse.json(
     [
       { id: 1, title: "کالا 1", price: 1000000, img: "/img/meat.jpg" },
