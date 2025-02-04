@@ -1,5 +1,6 @@
 import React from "react";
 import TrendCard from "./TrendCard";
+import { getproducts } from "../actions/product";
 
 type Commodity = {
   id: number;
@@ -8,10 +9,8 @@ type Commodity = {
 };
 
 const Trends = async () => {
-  const res = await fetch("http://localhost:3000/api/product");
-  const trendCommodity = await res.json();
+  const trendCommodity = await getproducts();
 
-  console.log(trendCommodity);
   return (
     <div className="bg-bgDark border border-border overflow-x-scroll p-4 text-whiteText">
       <div className="container mx-auto">

@@ -1,20 +1,10 @@
+import { getProduct, Product } from "@/app/actions/product";
 import React from "react";
-
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  img: string;
-  colors: { label: string; color: string }[];
-};
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
 
-  const product: Product = await fetch(
-    `http://localhost:3000/api/product/${id}`
-  ).then(async (response) => await response.json());
-
+  const product: Product = await getProduct(id);
   return (
     <div className="min-h-dvh w-screen bg-bgDark p-20">
       <div className="container mx-auto">
