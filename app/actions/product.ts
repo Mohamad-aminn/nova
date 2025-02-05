@@ -1,6 +1,9 @@
 "use server";
 
-const url = "https://nova-eight-kappa.vercel.app/";
+const url =
+  process.env.NODE_ENV === "production"
+    ? "https://nova-eight-kappa.vercel.app"
+    : "http://localhost:3000";
 
 export type Product = {
   id: number;
@@ -17,7 +20,7 @@ export type Commodity = {
 
 export const getproducts = async () => {
   try {
-    const res = await fetch(`${url}api/product`);
+    const res = await fetch(`${url}/api/product`);
     const trendCommodity = await res.json();
 
     return trendCommodity;
@@ -27,7 +30,7 @@ export const getproducts = async () => {
 };
 
 export const getProduct = async (id: number | string) => {
-  const product: Product = await fetch(`${url}api/product/${id}`).then(
+  const product: Product = await fetch(`${url}/api/product/${id}`).then(
     async (response) => await response.json()
   );
 
