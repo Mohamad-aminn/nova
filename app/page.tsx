@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Trends from "./components/Trends";
 import TrendSkeleton from "./components/skeleton/TrendSkeleton";
 import ProductTypes from "./components/ProductTypes";
+import Brands from "./components/Brands";
 
 const Home = async () => {
   // const { data } = await axios.post(
@@ -22,8 +23,8 @@ const Home = async () => {
     <div className="font-vazir min-h-[200vh]">
       <Navbar />
       <Hero />
-
       <ProductTypes />
+      <Brands />
       <Suspense fallback={<TrendSkeleton />}>
         <Trends />
       </Suspense>

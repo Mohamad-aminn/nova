@@ -33,4 +33,22 @@
   }
 
   /* product types */
+
+  /* brand  */
+  .wrapper {
+    width: 450px;
+    height: 50px;
+    position: relative;
+    margin: auto;
+    background: #ccc;
+    overflow: hidden;
+  }
+
+  .wrapper::after {
+    width: 448px;
+    height: 48px;
+    content: "";
+    position: absolute;
+    border: solid 1px white;
+  }
 }
