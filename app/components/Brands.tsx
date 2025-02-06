@@ -27,7 +27,7 @@ const Brands = () => {
       </div> */}
 
       <div className="wrapper">
-        <div className="relative ">
+        <div className="relative left-[50px]">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
             <div
               key={n}
