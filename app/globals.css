@@ -36,19 +36,10 @@
 
   /* brand  */
   .wrapper {
-    width: 450px;
-    height: 50px;
-    position: relative;
-    margin: auto;
-    background: #ccc;
-    overflow: hidden;
+    @apply w-full h-64 m-auto bg-transparent overflow-hidden;
   }
 
-  .wrapper::after {
-    width: 448px;
-    height: 48px;
-    content: "";
-    position: absolute;
-    border: solid 1px white;
+  .brand-box {
+    @apply w-[400px] h-64 absolute text-xl;
   }
 }
