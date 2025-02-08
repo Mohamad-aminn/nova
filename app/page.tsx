@@ -6,6 +6,7 @@ import TrendSkeleton from "./components/skeleton/TrendSkeleton";
 import ProductTypes from "./components/ProductTypes";
 import Brands from "./components/Brands";
 import About from "./components/About";
+import Footer from "./components/Footer";
 
 const Home = async () => {
   // const { data } = await axios.post(
@@ -30,6 +31,7 @@ const Home = async () => {
         <Trends />
       </Suspense>
       <About />
+      <Footer />
     </div>
   );
 };

@@ -15,7 +15,7 @@
 
   .pattern {
     transform: perspective(1500px) rotateX(-80deg);
-    @apply h-[1200px] relative -top-[440px] left-0 w-full bg-black;
+    @apply relative left-0 w-full bg-black;
   }
   .line-rotate {
     background: linear-gradient(to bottom, #39fdfa77, transparent 70%);
@@ -23,9 +23,7 @@
   }
 
   .hero-radial {
-    @apply h-36 w-[70vw] absolute top-1/2 left-1/2 !translate-x-[-50%];
-    filter: blur(200px);
-    background: #39fdfaa9;
+    @apply absolute top-1/2 left-1/2 !translate-x-[-50%];
   }
 
   .hero-container {
@@ -46,5 +44,10 @@
   .light {
     @apply bg-white rounded-full absolute h-12 w-16 transition-all !translate-x-[-50%] top-8 left-1/2;
     filter: blur(9px);
+  }
+
+  /* footer */
+  .footer-cp {
+    @apply absolute bottom-2  left-1/2 !translate-x-[-50%] text-xs;
   }
 }
