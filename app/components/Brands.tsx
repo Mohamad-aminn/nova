@@ -72,7 +72,7 @@ const Brands = () => {
   });
 
   return (
-    <div className="p-5 relative bg-black pb-20 pt-72">
+    <div className="p-5 relative bg-black pb-20 pt-60">
       <div
         onClick={switchLight}
         className="absolute -top-10 left-1/2 translate-x-[-50%] rotate-180"
@@ -80,7 +80,9 @@ const Brands = () => {
         <img
           alt="light bulb"
           src="/img/light-bulb.png"
-          className="size-40 object-contain z-20"
+          className={`size-40 object-contain z-20 transition-all ${
+            light ? "opacity-100" : "opacity-30"
+          }`}
         />
 
         <div className={`light ${light ? "opacity-100" : "opacity-0"}`} />
