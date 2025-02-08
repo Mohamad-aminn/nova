@@ -2,7 +2,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // Nike adidas puma Zara ihpne samsung shiami nestle chopan golrang
 const brands = [
   {
@@ -51,6 +51,10 @@ const brands = [
 const Brands = () => {
   const [light, setLight] = useState(true);
 
+  const switchLight = () => {
+    setLight(!light);
+  };
+
   useGSAP(() => {
     gsap.set(".brand-box", {
       x: (i) => i * -400,
@@ -68,12 +72,21 @@ const Brands = () => {
   });
 
   return (
-    <div className="p-5 bg-black pb-20 pt-72">
-      {/* <div className="size-full">
-        <img className="size-full" src="/img/light.png" alt="light" />
-      </div> */}
+    <div className="p-5 relative bg-black pb-20 pt-72">
+      <div
+        onClick={switchLight}
+        className="absolute -top-10 left-1/2 translate-x-[-50%] rotate-180"
+      >
+        <img
+          alt="light bulb"
+          src="/img/light-bulb.png"
+          className="size-40 object-contain z-20"
+        />
 
-      <div className="wrapper">
+        <div className={`light ${light ? "opacity-100" : "opacity-0"}`} />
+      </div>
+
+      <div className={`wrapper ${light ? "opacity-100" : "opacity-20"}`}>
         <div className="relative left-[400px]">
           {brands.map((n, i) => (
             <div key={i} className="brand-box">

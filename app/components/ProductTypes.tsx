@@ -3,7 +3,7 @@ import Hero from "./Hero";
 
 const ProductTypes = () => {
   return (
-    <div className="p-8 bg-bgDark border-t border-border py-20">
+    <div className="p-8 bg-bgDark border-t border-border py-20 z-20 relative">
       <div className="container m-auto">
         <div className="font-bold text-center text-5xl mb-12">
           <p>چی می خوای بخری؟</p>

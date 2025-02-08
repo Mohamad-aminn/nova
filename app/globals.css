@@ -36,10 +36,15 @@
 
   /* brand  */
   .wrapper {
-    @apply w-full h-64 m-auto bg-transparent overflow-hidden;
+    @apply w-full h-64 m-auto bg-transparent overflow-hidden transition-all;
   }
 
   .brand-box {
     @apply w-[400px] h-64 absolute text-xl;
+  }
+
+  .light {
+    @apply bg-white rounded-full absolute h-12 w-16 transition-all !translate-x-[-50%] top-8 left-1/2;
+    filter: blur(9px);
   }
 }
