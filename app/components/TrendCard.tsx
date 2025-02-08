@@ -2,7 +2,7 @@ import React from "react";
 
 const TrendCard = ({ title, price }: { title: string; price: number }) => {
   return (
-    <div className="border rounded-lg overflow-hidden border-border">
+    <div className="border min-w-40 rounded-lg overflow-hidden border-border">
       <div className="size-40">
         <img
           className="size-full object-cover object-center"
