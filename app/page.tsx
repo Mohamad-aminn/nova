@@ -5,6 +5,7 @@ import Trends from "./components/Trends";
 import TrendSkeleton from "./components/skeleton/TrendSkeleton";
 import ProductTypes from "./components/ProductTypes";
 import Brands from "./components/Brands";
+import About from "./components/About";
 
 const Home = async () => {
   // const { data } = await axios.post(
@@ -20,7 +21,7 @@ const Home = async () => {
   // redirect(`https://sandbox.zarinpal.com/pg/StartPay/${data.data.authority}`);
 
   return (
-    <div className="font-vazir min-h-[200vh]">
+    <div className="font-vazir overflow-x-hidden">
       <Navbar />
       <Hero />
       <ProductTypes />
@@ -28,6 +29,7 @@ const Home = async () => {
       <Suspense fallback={<TrendSkeleton />}>
         <Trends />
       </Suspense>
+      <About />
     </div>
   );
 };

@@ -12,7 +12,7 @@ const Trends = async () => {
         <div className="text-xl font-semibold my-4">
           <p>⬅️ کالا های ترند این هفته 🔥</p>
         </div>
-        <div className="w-full flex justify-between gap-16 overflow-x-scroll">
+        <div className="w-full flex justify-between gap-16">
           {trendCommodity?.map((c) => (
             <TrendCard key={c.id} {...c} />
           ))}
