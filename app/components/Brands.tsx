@@ -2,7 +2,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // Nike adidas puma Zara ihpne samsung shiami nestle chopan golrang
 const brands = [
   {
