@@ -21,6 +21,17 @@ const Home = async () => {
   // );
   // redirect(`https://sandbox.zarinpal.com/pg/StartPay/${data.data.authority}`);
 
+  // const user: typeof usersTable.$inferInsert = {
+  //   name: "John",
+  //   age: 30,
+  //   email: "john@example.com",
+  // };
+  // await db.insert(usersTable).values(user);
+  // console.log("New user created!");
+
+  // const users = await db.select().from(usersTable);
+  // console.log(users);
+
   return (
     <div className="font-vazir overflow-x-hidden">
       <Navbar />
