@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { integer, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
 
 //one to one ex:users and users a user invited another user
@@ -6,7 +7,7 @@ import { integer, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
 
 //many to many ex:many users in many groups
 
-export const usersTable = pgTable("users", {
+export const users = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity().unique(),
   fullName: varchar({ length: 255 }).notNull(),
   age: integer().notNull(),
@@ -20,22 +21,30 @@ export const usersTable = pgTable("users", {
   updatedAt: timestamp("updated_at", { mode: "string" }),
 });
 
-export const productsTable = pgTable("products", {
+export const purchases = pgTable("purchases", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity().unique(),
+  buyerId: integer("buyer_id"),
+});
+
+export const products = pgTable("products", {
   id: integer().primaryKey().generatedAlwaysAsIdentity().unique(),
   img: varchar({ length: 255 }).notNull(),
   title: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 513 }),
   price: integer().notNull(),
-  buyersId: integer().references(() => usersTable.id),
+  // buyersId: integer().references(() => users.id),
   createdAt: timestamp("created_at", { mode: "string" }).defaultNow(),
   updatedAt: timestamp("updated_at", { mode: "string" }),
 });
 
-export const purchasesTable = pgTable("purchases", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity().unique(),
-  // items:
+export const userRelations = relations(users, ({ many }) => ({
+  purchases: many(purchases),
+}));
 
-  buyerId: integer()
-    .notNull()
-    .references(() => usersTable.id),
-});
+export const purchasesRelation = relations(purchases, ({ one, many }) => ({
+  buyer: one(users, {
+    fields: [purchases.buyerId],
+    references: [users.id],
+  }),
+  items: many(products),
+}));
