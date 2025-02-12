@@ -13,11 +13,10 @@ export const POST = async (req: NextRequest) => {
       where: eq(users.phone_number, phone),
     });
 
-    if (
-      user?.otp_expiration &&
-      new Date().getTime() - user.otp_expiration.getTime() <= 180000
-    ) {
-      return Response.json({ error: "شما قبلا درخواست کد کردین!" });
+    if (user?.otp_expiration) {
+      if (new Date().getTime() - user.otp_expiration.getTime() <= 180000) {
+        return Response.json({}, { status: 202 });
+      }
     }
 
     if (!user) {
