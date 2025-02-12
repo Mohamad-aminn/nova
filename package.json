@@ -14,12 +14,16 @@
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.2",
     "gsap": "^3.12.7",
+    "melipayamak": "^1.0.5",
     "next": "15.1.6",
+    "next-auth": "^5.0.0-beta.25",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
     "react-text-transition": "^3.1.0",
-    "react-use": "^17.6.0"
+    "react-use": "^17.6.0",
+    "reactjs-otp-input": "^2.0.10"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

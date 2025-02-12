@@ -1,0 +1,75 @@
+.box {
+  @apply w-full max-w-96 h-[420px] bg-[#1c1c1c] rounded-lg p-5 relative overflow-hidden;
+}
+
+.login_form {
+  @apply absolute bg-[#222] inset-1 p-14 rounded-lg z-[2];
+}
+
+.login_input {
+  @apply bg-transparent outline-none border-none mt-9 w-full p-1 relative text-[#2c2c2c];
+}
+
+.login_label {
+  @apply text-gray-500 p-2;
+}
+
+.login_input:focus ~ .login_label {
+  @apply text-white text-lg;
+  font-size: 0.75em;
+  transform: translateY(-36px);
+}
+
+.links {
+  @apply flex justify-between font-bold mt-3 mb-12 text-gray-400;
+
+  font-size: 0.9rem;
+}
+
+.login_button {
+  @apply border-none w-24  rounded-sm p-3 font-bold;
+
+  letter-spacing: 0.5px;
+}
+
+.box::before {
+  @apply w-96 h-[400px] absolute -top-1/2 -left-1/2 origin-bottom-right;
+  content: "";
+
+  background: linear-gradient(
+    0deg,
+    transparent,
+    transparent,
+    rgb(161, 225, 255),
+    rgb(161, 255, 239),
+    rgb(161, 255, 239)
+  );
+
+  animation: animate linear infinite 6s;
+}
+
+.box::after {
+  @apply w-96 h-[400px] absolute -top-1/2 -left-1/2 origin-bottom-right;
+
+  content: "";
+
+  background: linear-gradient(
+    0deg,
+    transparent,
+    transparent,
+    rgb(161, 255, 239),
+    rgb(161, 255, 239),
+    rgb(161, 255, 239)
+  );
+  animation: animate linear infinite 6s;
+  animation-delay: 3s;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

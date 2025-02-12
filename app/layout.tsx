@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="rtl">
-      <body className={`${vazir.variable} antialiased`}>{children}</body>
+      <body className={`${vazir.className} antialiased`}>{children}</body>
     </html>
   );
 }
