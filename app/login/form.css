@@ -1,5 +1,5 @@
 .box {
-  @apply w-full max-w-96 h-[420px] bg-[#1c1c1c] rounded-lg p-5 relative overflow-hidden;
+  @apply w-full h-full md:max-w-96 md:h-[420px] bg-[#1c1c1c] rounded-lg p-5 relative overflow-hidden;
 }
 
 .login_form {
@@ -33,7 +33,7 @@
 }
 
 .box::before {
-  @apply w-96 h-[400px] absolute -top-1/2 -left-1/2 origin-bottom-right;
+  @apply w-[500px] h-[700px] md:w-96 md:h-[400px] absolute -left-[30%] md:-left-1/2 -top-1/2 origin-bottom-right;
   content: "";
 
   background: linear-gradient(
@@ -49,7 +49,7 @@
 }
 
 .box::after {
-  @apply w-96 h-[400px] absolute -top-1/2 -left-1/2 origin-bottom-right;
+  @apply w-[500px] h-[700px] md:w-96 md:h-[400px] absolute -left-[30%] md:-left-1/2 -top-1/2 origin-bottom-right;
 
   content: "";
 

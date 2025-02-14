@@ -4,17 +4,74 @@ import "./form.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { OtpInput } from "reactjs-otp-input";
-import { SessionProvider, signIn } from "next-auth/react";
-import Sess from "./Sess";
+// import { SessionProvider, signIn } from "next-auth/react";
 import { findUser } from "../actions/user";
+import { phoneSchema } from "../schema/user";
+import { toast } from "react-toastify";
 // import { redirect } from "next/navigation";
 
+const verifyPhone = async (
+  e: React.FormEvent<HTMLFormElement>,
+  setShowOtp: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setError: React.Dispatch<React.SetStateAction<string>>,
+  phone: string
+) => {
+  try {
+    e.preventDefault();
+    setLoading(true);
+
+    const verifiedResult = phoneSchema.safeParse({ phone });
+    if (!verifiedResult.success) {
+      setError(verifiedResult.error.issues[0].message);
+      console.log(verifiedResult.error.issues[0].message);
+      toast.error(verifiedResult.error.issues[0].message);
+      return;
+    }
+
+    const res = await fetch("http://localhost:3000/api/otp/send", {
+      method: "POST",
+      body: JSON.stringify({ phone }),
+    });
+
+    if (res.status === 500) {
+      throw Error("مشکلی در سرور به وجود اومده!");
+    }
+
+    if (res.ok) {
+      setShowOtp(true);
+    }
+  } catch (error) {
+    if (typeof error === "string") {
+      toast.error(error);
+    } else if (e instanceof Error) {
+      toast.error(e.message); // works, `e` narrowed to Error
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
 const page = () => {
+  const [data, setData] = useState({
+    phone: "",
+    otp: "",
+  });
   const [loading, setLoading] = useState(false);
-  const [showOtp, setShowOtp] = useState(false);
+  const [showOtp, setShowOtp] = useState(true);
+  const [error, setError] = useState("");
 
   const submitHandler = () => {
     console.log("object");
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   useEffect(() => {
@@ -48,15 +105,11 @@ const page = () => {
         )}
         <div className="login_form">
           <h3 className="text-stone-300 text-center tracking-wide">ثبت نام </h3>
-          <SessionProvider>
-            <Sess />
-          </SessionProvider>
 
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setShowOtp(true);
-            }}
+            onSubmit={(e) =>
+              verifyPhone(e, setShowOtp, setLoading, setError, data.phone)
+            }
             id="phone-input"
             className="input-div relative mt-12"
           >
@@ -64,6 +117,9 @@ const page = () => {
               شماره موبایل
             </label>
             <input
+              value={data.phone}
+              onChange={(e) => handleChange(e)}
+              name="phone"
               type="text"
               placeholder="این مدلی وارد کنید:  *********09"
               className="input input-bordered w-full max-w-xs"
@@ -79,7 +135,7 @@ const page = () => {
 
           <form
             id="otp-input"
-            className="absolute top-[31%] w-[264px] translate-x-96"
+            className="absolute flex size-full top-[31%] w-[264px] translate-x-96"
           >
             <label className="login_label mb-1" htmlFor="password">
               کد ارسال شده
@@ -88,8 +144,10 @@ const page = () => {
               containerStyle={{ direction: "ltr", gap: 8 }}
               inputStyle={{ width: "100%", height: 50, borderRadius: 7 }}
               isInputNum
-              value={""}
-              onChange={() => {}}
+              value={data.otp}
+              onChange={(e) => {
+                console.log(e);
+              }}
               numInputs={6}
               separator={<span></span>}
             />
@@ -98,10 +156,6 @@ const page = () => {
               onClick={async (e) => {
                 try {
                   e.preventDefault();
-                  const res = await signIn("credentials", {
-                    phone: "09201370140",
-                  });
-                  console.log(res);
                 } catch (error) {
                   console.log(error);
                 }
