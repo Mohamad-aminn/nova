@@ -81,13 +81,13 @@ const page = () => {
   useGSAP(
     () => {
       gsap.to("#phone-input", {
-        x: showOtp ? 500 : 0,
+        x: showOtp ? 800 : 0,
         duration: 0.3,
         ease: "power1.inOut",
       });
 
       gsap.to("#otp-input", {
-        x: showOtp ? 0 : 500,
+        x: showOtp ? "50%" : 800,
         duration: 0.3,
         ease: "power1.inOut",
       });
@@ -135,7 +135,7 @@ const page = () => {
 
           <form
             id="otp-input"
-            className="absolute flex size-full top-[31%] w-[264px] translate-x-96"
+            className="absolute size-full right-1/2 top-[31%] w-[264px] translate-x-[1000px]"
           >
             <label className="login_label mb-1" htmlFor="password">
               کد ارسال شده
