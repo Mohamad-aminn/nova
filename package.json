@@ -14,6 +14,7 @@
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.2",
     "gsap": "^3.12.7",
+    "jsonwebtoken": "^9.0.2",
     "melipayamak": "^1.0.5",
     "next": "15.1.6",
     "next-auth": "^5.0.0-beta.25",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/jsonwebtoken": "^9.0.8",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
