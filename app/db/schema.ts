@@ -1,11 +1,5 @@
 import { relations } from "drizzle-orm";
-import {
-  integer,
-  pgTable,
-  timestamp,
-  varchar,
-  date,
-} from "drizzle-orm/pg-core";
+import { integer, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
 
 //one to one ex:users and users a user invited another user
 
