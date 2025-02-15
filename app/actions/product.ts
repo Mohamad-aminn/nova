@@ -1,5 +1,7 @@
 "use server";
 
+import { toast } from "react-toastify";
+
 const url =
   process.env.NODE_ENV === "production"
     ? "https://nova-eight-kappa.vercel.app"
@@ -21,9 +23,12 @@ export type Commodity = {
 export const getproducts = async () => {
   try {
     const res = await fetch(`${url}/api/product`);
-    const trendCommodity = await res.json();
+    const result = await res.json();
 
-    return trendCommodity;
+    if (!res.ok) {
+      return toast.error("error");
+    }
+    return result;
   } catch (error) {
     console.log(error);
   }

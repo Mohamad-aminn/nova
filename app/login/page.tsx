@@ -4,17 +4,21 @@ import "./form.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { OtpInput } from "reactjs-otp-input";
-// import { SessionProvider, signIn } from "next-auth/react";
 import { findUser } from "../actions/user";
-import { phoneSchema } from "../schema/user";
+import { loginSchema, phoneSchema } from "../schema/user";
 import { toast } from "react-toastify";
-// import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useSetCookie } from "cookies-next";
+
+type loginData = {
+  phone: string;
+  otp: string;
+};
 
 const verifyPhone = async (
   e: React.FormEvent<HTMLFormElement>,
   setShowOtp: React.Dispatch<React.SetStateAction<boolean>>,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  setError: React.Dispatch<React.SetStateAction<string>>,
   phone: string
 ) => {
   try {
@@ -23,8 +27,6 @@ const verifyPhone = async (
 
     const verifiedResult = phoneSchema.safeParse({ phone });
     if (!verifiedResult.success) {
-      setError(verifiedResult.error.issues[0].message);
-      console.log(verifiedResult.error.issues[0].message);
       toast.error(verifiedResult.error.issues[0].message);
       return;
     }
@@ -38,9 +40,12 @@ const verifyPhone = async (
       throw Error("مشکلی در سرور به وجود اومده!");
     }
 
-    if (res.ok) {
-      setShowOtp(true);
+    if (!res.ok) {
+      const result = await res.json();
+      throw Error(result.error);
     }
+
+    setShowOtp(true);
   } catch (error) {
     if (typeof error === "string") {
       toast.error(error);
@@ -58,11 +63,58 @@ const page = () => {
     otp: "",
   });
   const [loading, setLoading] = useState(false);
-  const [showOtp, setShowOtp] = useState(true);
-  const [error, setError] = useState("");
+  const [showOtp, setShowOtp] = useState(false);
 
-  const submitHandler = () => {
-    console.log("object");
+  const router = useRouter();
+  const setCookie = useSetCookie();
+
+  const submitHandler = async (
+    e: React.FormEvent<HTMLFormElement>,
+    data: loginData,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      console.log(data);
+
+      const validateData = loginSchema.safeParse(data);
+      console.log(validateData);
+      if (!validateData.success) {
+        return validateData.error.issues.map((i) => toast.error(i.message));
+      }
+
+      const res = await fetch("http://localhost:3000/api/otp/verify", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw Error(result.error);
+      }
+      console.log(result);
+
+      setCookie("access_token", result.access_token, {
+        domain: "localhost",
+        maxAge: 1200000,
+        httpOnly: true,
+        path: "/",
+        secure: false,
+      });
+
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+      if (typeof error === "string") {
+        return toast.error(error);
+      } else if (error instanceof Error) {
+        return toast.error(error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,9 +159,7 @@ const page = () => {
           <h3 className="text-stone-300 text-center tracking-wide">ثبت نام </h3>
 
           <form
-            onSubmit={(e) =>
-              verifyPhone(e, setShowOtp, setLoading, setError, data.phone)
-            }
+            onSubmit={(e) => verifyPhone(e, setShowOtp, setLoading, data.phone)}
             id="phone-input"
             className="input-div relative mt-12"
           >
@@ -134,6 +184,7 @@ const page = () => {
           </form>
 
           <form
+            onSubmit={(e) => submitHandler(e, data, setLoading)}
             id="otp-input"
             className="absolute size-full right-1/2 top-[31%] w-[264px] translate-x-[1000px]"
           >
@@ -146,30 +197,18 @@ const page = () => {
               isInputNum
               value={data.otp}
               onChange={(e) => {
-                console.log(e);
+                setData((prev) => ({ ...prev, otp: e }));
               }}
               numInputs={6}
               separator={<span></span>}
             />
             <button
               type="submit"
-              onClick={async (e) => {
-                try {
-                  e.preventDefault();
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
               className="w-full text-black font-extrabold rounded-xl bg-cyan-600 p-4 mt-20"
             >
               ارسال کد
             </button>
           </form>
-
-          {/* <div className="links">
-            <a href="#">forgot password</a>
-            <a href="#">sign up</a>
-          </div> */}
         </div>
       </div>
     </div>

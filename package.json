@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "cookies-next": "^5.1.0",
     "daisyui": "^4.12.23",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.2",

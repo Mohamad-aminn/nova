@@ -1,3 +1,4 @@
+// "use client";
 import { Suspense } from "react";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
@@ -7,8 +8,17 @@ import ProductTypes from "./components/ProductTypes";
 import Brands from "./components/Brands";
 import About from "./components/About";
 import Footer from "./components/Footer";
+import db from "./db/db";
+import { eq } from "drizzle-orm";
+import { users } from "./db/schema";
+// import { useGetCookies } from "cookies-next";
+import { getCookie, getCookies, setCookie } from "cookies-next";
+import { cookies } from "next/headers";
 
 const Home = async () => {
+  const jwt = await getCookie("access_token", { cookies });
+  console.log(jwt);
+
   // const { data } = await axios.post(
   //   "https://sandbox.zarinpal.com/pg/v4/payment/request.json",
   //   {
@@ -32,13 +42,17 @@ const Home = async () => {
   // const users = await db.select().from(usersTable);
   // console.log(users);
 
+  const user = await db.query.users.findFirst({
+    where: eq(users.phone_number, "09201370140"),
+  });
+  console.log(user);
   return (
     <div className="font-vazir overflow-x-hidden">
       <Navbar />
       <Hero />
       <ProductTypes />
       <Brands />
-      <Suspense fallback={<TrendSkeleton />}>
+      <Suspense key={1} fallback={<TrendSkeleton />}>
         <Trends />
       </Suspense>
       <About />

@@ -45,7 +45,7 @@ export const POST = async (req: NextRequest) => {
       `${otp}\n کد تایید نوا 🏥\n اگر شما درخواست کد نکردید این پیام رو نادیده بگیرین`
     );
 
-    return Response.json({}, { status: 201 });
+    return Response.json({ otp }, { status: 201 });
   } catch (error) {
     console.log(error);
     return Response.json(error, { status: 500 });
