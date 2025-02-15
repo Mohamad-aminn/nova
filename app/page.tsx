@@ -1,4 +1,3 @@
-// "use client";
 import { Suspense } from "react";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
@@ -12,11 +11,11 @@ import db from "./db/db";
 import { eq } from "drizzle-orm";
 import { users } from "./db/schema";
 // import { useGetCookies } from "cookies-next";
-import { getCookie, getCookies, setCookie } from "cookies-next";
+import { deleteCookie, getCookies } from "cookies-next";
 import { cookies } from "next/headers";
 
 const Home = async () => {
-  const jwt = await getCookie("access_token", { cookies });
+  const jwt = await getCookies({ cookies });
   console.log(jwt);
 
   // const { data } = await axios.post(

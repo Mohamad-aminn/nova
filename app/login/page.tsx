@@ -8,7 +8,8 @@ import { findUser } from "../actions/user";
 import { loginSchema, phoneSchema } from "../schema/user";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { useSetCookie } from "cookies-next";
+import { deleteCookie, setCookie } from "cookies-next";
+import { jwtDecode } from "jwt-decode";
 
 type loginData = {
   phone: string;
@@ -66,7 +67,6 @@ const page = () => {
   const [showOtp, setShowOtp] = useState(false);
 
   const router = useRouter();
-  const setCookie = useSetCookie();
 
   const submitHandler = async (
     e: React.FormEvent<HTMLFormElement>,
@@ -94,12 +94,19 @@ const page = () => {
       if (!res.ok) {
         throw Error(result.error);
       }
-      console.log(result);
 
       setCookie("access_token", result.access_token, {
         domain: "localhost",
         maxAge: 1200000,
-        httpOnly: true,
+        path: "/",
+        secure: false,
+      });
+
+      const decodedJwt = jwtDecode(result.access_token);
+
+      setCookie("user", JSON.stringify(decodedJwt), {
+        domain: "localhost",
+        maxAge: 1200000,
         path: "/",
         secure: false,
       });
