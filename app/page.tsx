@@ -13,6 +13,7 @@ import { users } from "./db/schema";
 // import { useGetCookies } from "cookies-next";
 import { deleteCookie, getCookies } from "cookies-next";
 import { cookies } from "next/headers";
+import NavigationBar from "./components/NavigationBar";
 
 const Home = async () => {
   const jwt = await getCookies({ cookies });
@@ -56,6 +57,7 @@ const Home = async () => {
       </Suspense>
       <About />
       <Footer />
+      <NavigationBar />
     </div>
   );
 };
