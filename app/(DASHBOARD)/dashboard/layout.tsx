@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import Sidebar from "./components/Sidebar";
-import SidebarSkeleton from "../components/skeleton/SidebarSkeleton";
+import SidebarSkeleton from "@/app/components/skeleton/SidebarSkeleton";
 
 const layout = ({ children }: React.PropsWithChildren) => {
   return (
