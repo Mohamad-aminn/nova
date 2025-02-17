@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="rtl">
-      <body className={`${vazir.className} antialiased mb-16`}>
+      <body className={`${vazir.className} antialiased mb-16 sm:mb-0`}>
         {children}
         <div>
           <ToastContainer

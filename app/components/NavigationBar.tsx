@@ -5,7 +5,7 @@ import { GoHomeFill } from "react-icons/go";
 
 const NavigationBar = () => {
   return (
-    <div className="fixed z-50 border-b-0 rounded-t-xl bottom-0 left-0 p-5 md:hidden w-full bg-black border border-[#39fdfa77]/40">
+    <div className="fixed z-50 border-b-0 rounded-t-xl bottom-0 left-0 p-5 sm:hidden w-full bg-black border border-[#39fdfa77]/40">
       <div className="size-full flex items-center justify-around">
         <Link href={"/dashboard"} className="size-full flex justify-center">
           <FaUser size={24} color="#67e8f9" />

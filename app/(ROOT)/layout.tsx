@@ -3,11 +3,16 @@ import Navbar from "../components/Home/Navbar";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 
-const layout = () => {
+const layout = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   return (
     <div>
       <Navbar />
       <Hero />
+      {children}
       <Footer />
     </div>
   );
