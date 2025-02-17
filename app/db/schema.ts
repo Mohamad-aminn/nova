@@ -26,7 +26,9 @@ export const users = pgTable("users", {
 
 export const products = pgTable("products", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  img: varchar({ length: 255 }).notNull(),
+  img: varchar({ length: 255 })
+    .default("https://i.postimg.cc/DzHZvsBd/no-image.png")
+    .notNull(),
   title: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 513 }),
   price: integer().notNull(),

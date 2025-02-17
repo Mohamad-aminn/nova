@@ -1,11 +1,8 @@
 import Products from "@/app/components/products/Products";
 import db from "@/app/db/db";
-import { getCookie } from "cookies-next";
-import { cookies } from "next/headers";
 import React from "react";
 
 const page = async () => {
-  const userDetails = await getCookie("userDetails", { cookies });
   const products = await db.query.products.findMany();
 
   return (
