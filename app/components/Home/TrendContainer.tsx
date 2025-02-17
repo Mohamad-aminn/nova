@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import TrendSkeleton from "./skeleton/TrendSkeleton";
+import TrendSkeleton from "../skeleton/TrendSkeleton";
 import Trends from "./Trends";
 
 const TrendContainer = () => {

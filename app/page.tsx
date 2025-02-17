@@ -1,15 +1,15 @@
 import { Suspense } from "react";
 import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
-import Trends from "./components/Trends";
+import Navbar from "./components/Home/Navbar";
+import Trends from "./components/Home/Trends";
 import TrendSkeleton from "./components/skeleton/TrendSkeleton";
-import ProductTypes from "./components/ProductTypes";
-import Brands from "./components/Brands";
-import About from "./components/About";
+import ProductTypes from "./components/Home/ProductTypes";
+import Brands from "./components/Home/Brands";
+import About from "./components/Home/About";
 import Footer from "./components/Footer";
 import db from "./db/db";
 import { eq } from "drizzle-orm";
-import { users } from "./db/schema";
+import { products, users } from "./db/schema";
 // import { useGetCookies } from "cookies-next";
 import { deleteCookie, getCookies } from "cookies-next";
 import { cookies } from "next/headers";
@@ -45,6 +45,9 @@ const Home = async () => {
   const user = await db.query.users.findFirst({
     where: eq(users.phone_number, "09201370140"),
   });
+  const productss = await db.query.products.findMany();
+
+  console.log(productss);
   console.log(user);
   return (
     <div className="font-vazir overflow-x-hidden">

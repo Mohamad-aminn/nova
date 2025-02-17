@@ -2,6 +2,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
+import NavigationBar from "./components/NavigationBar";
+import Footer from "./components/Footer";
 
 const vazir = localFont({
   src: [
@@ -28,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="rtl">
-      <body className={`${vazir.className} antialiased`}>
+      <body className={`${vazir.className} antialiased mb-16`}>
         {children}
         <div>
           <ToastContainer
@@ -39,6 +41,8 @@ export default function RootLayout({
             position="top-center"
           />
         </div>
+
+        <NavigationBar />
       </body>
     </html>
   );

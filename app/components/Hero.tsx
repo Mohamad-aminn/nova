@@ -1,6 +1,6 @@
 import React from "react";
-import Pattern from "./Pattern";
-import Radialbg from "./Radialbg";
+import Pattern from "./Home/Pattern";
+import Radialbg from "./Home/Radialbg";
 
 const Hero = () => {
   // 4 * (6 - 1);

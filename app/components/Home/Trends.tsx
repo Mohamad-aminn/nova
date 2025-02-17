@@ -1,6 +1,6 @@
 import React from "react";
 import TrendCard from "./TrendCard";
-import { Commodity, getproducts } from "../actions/product";
+import { Commodity, getproducts } from "../../actions/product";
 
 const Trends = async () => {
   const trendCommodity: Commodity[] = await getproducts();

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const ProductTypes = () => {
@@ -8,13 +9,16 @@ const ProductTypes = () => {
           <p>چی می خوای بخری؟</p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 grid-rows-1 lg:grid-rows-2 gap-28">
-          <div className="border-2 hover: border-cyan-300 p-20 rounded-xl shadow-[0px_0px_7px_3px_#31a38e,_#31a38e_0px_0px_3px_3px_inset]">
+          <Link
+            href={"/cloths"}
+            className="border-2 hover: border-cyan-300 p-20 rounded-xl shadow-[0px_0px_7px_3px_#31a38e,_#31a38e_0px_0px_3px_3px_inset]"
+          >
             <img
               alt=""
               src="/img/product-cloth-logo.png"
               className="m-auto size-full drop-shadow-[0_70px_70px_#31a38e] transition-all object-none"
             />
-          </div>
+          </Link>
 
           <div className="border-2 flex items-center border-blue-300 p-20 rounded-xl shadow-[0px_0px_7px_3px_#1d4ed8,_#1d4ed8_0px_0px_3px_3px_inset]">
             {/* <div className="mockup-phone m-auto">
