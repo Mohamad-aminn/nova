@@ -11,13 +11,16 @@ import db from "./db/db";
 import { eq } from "drizzle-orm";
 import { products, users } from "./db/schema";
 // import { useGetCookies } from "cookies-next";
-import { deleteCookie, getCookies } from "cookies-next";
+import { deleteCookie, getCookie, getCookies } from "cookies-next";
 import { cookies } from "next/headers";
 import NavigationBar from "./components/NavigationBar";
+import { verify } from "jsonwebtoken";
 
 const Home = async () => {
-  const jwt = await getCookies({ cookies });
-  console.log(jwt);
+  const allCookies = await getCookies({ cookies });
+  console.log(allCookies);
+
+  const jwt = await getCookie("access_token", { cookies });
 
   // const { data } = await axios.post(
   //   "https://sandbox.zarinpal.com/pg/v4/payment/request.json",
