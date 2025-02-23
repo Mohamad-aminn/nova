@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Marker, useMap } from "react-leaflet";
+import { Marker, useMap, useMapEvents } from "react-leaflet";
 import { FaLocationCrosshairs } from "react-icons/fa6";
 
 const MapEvent = () => {
@@ -9,6 +9,11 @@ const MapEvent = () => {
   );
 
   const map = useMap();
+  const MapEvents = useMapEvents({
+    moveend: () => {
+      console.log(MapEvents.getCenter());
+    },
+  });
 
   return (
     <>
