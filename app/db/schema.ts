@@ -19,10 +19,13 @@ export const users = pgTable("users", {
   role: varchar({ enum: ["user", "employee", "admin"] })
     .default("user")
     .notNull(),
-  purchases: integer(),
   createdAt: timestamp("created_at", { mode: "string" }).defaultNow(),
   updatedAt: timestamp("updated_at", { mode: "string" }),
 });
+
+export const userRelations = relations(users, ({ many }) => ({
+  purchases: many(purchases),
+}));
 
 export const products = pgTable("products", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -45,11 +48,7 @@ export const purchases = pgTable("purchases", {
   //   .references(() => products.id),
 });
 
-export const userRelations = relations(users, ({ many }) => ({
-  purchases: many(purchases),
-}));
-
-export const purchasesRelation = relations(purchases, ({ one }) => ({
+export const purchasesRelations = relations(purchases, ({ one }) => ({
   buyer: one(users, {
     fields: [purchases.buyerId],
     references: [users.id],

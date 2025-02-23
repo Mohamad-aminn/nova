@@ -5,7 +5,7 @@ import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+export const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 export const middleware = async (req: NextRequest) => {
   const jwt = await getCookie("access_token", { cookies });

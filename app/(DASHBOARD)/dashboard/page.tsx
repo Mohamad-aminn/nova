@@ -1,11 +1,12 @@
 import db from "@/app/db/db";
 import { products } from "@/app/db/schema";
-import { getCookie } from "cookies-next";
+import { getCookie, getCookies } from "cookies-next";
 import { and, inArray } from "drizzle-orm";
 import { cookies } from "next/headers";
 import React from "react";
 
 const page = async () => {
+  console.log(await getCookies({ cookies }));
   const userDetails = await getCookie("userDetails", { cookies });
 
   const cartIds: number[] = userDetails ? JSON.parse(userDetails).cart : null;

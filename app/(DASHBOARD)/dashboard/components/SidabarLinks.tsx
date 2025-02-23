@@ -31,8 +31,8 @@ const SidabarLinks = () => {
         <Link
           key={i}
           href={l.href}
-          className={`flex relative items-center gap-5 px-8 me-8 py-4 rounded-e-lg ${
-            pathname === l.href && "bg-[#0F151A]"
+          className={`flex hover:bg-[#0F151A] transition-all relative items-center gap-5 px-8 me-8 py-4 rounded-e-lg ${
+            pathname === l.href ? "bg-[#0F151A]" : "text-whiteText/70"
           }`}
         >
           {pathname === l.href && (

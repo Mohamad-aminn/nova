@@ -3,7 +3,6 @@ import "./globals.css";
 import { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import NavigationBar from "./components/NavigationBar";
-import Footer from "./components/Footer";
 
 const vazir = localFont({
   src: [

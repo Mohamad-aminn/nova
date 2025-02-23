@@ -51,3 +51,7 @@
     @apply absolute bottom-2  left-1/2 !translate-x-[-50%] text-xs;
   }
 }
+
+.leaflet-control-attribution {
+  display: none;
+}

@@ -10,11 +10,12 @@ import Footer from "./components/Footer";
 import db from "./db/db";
 import { eq } from "drizzle-orm";
 import { products, users } from "./db/schema";
-// import { useGetCookies } from "cookies-next";
 import { deleteCookie, getCookie, getCookies } from "cookies-next";
 import { cookies } from "next/headers";
 import NavigationBar from "./components/NavigationBar";
 import { verify } from "jsonwebtoken";
+import dynamic from "next/dynamic";
+import Map from "@/app/components/Map";
 
 const Home = async () => {
   const allCookies = await getCookies({ cookies });
@@ -56,6 +57,7 @@ const Home = async () => {
     <div className="font-vazir overflow-x-hidden">
       <Navbar />
       <Hero />
+      <Map />
       <ProductTypes />
       <Brands />
       <Suspense key={1} fallback={<TrendSkeleton />}>
