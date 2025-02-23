@@ -16,6 +16,7 @@ import NavigationBar from "./components/NavigationBar";
 import { verify } from "jsonwebtoken";
 import dynamic from "next/dynamic";
 import Map from "@/app/components/Map";
+import { MapContextConatiner } from "./context/mapContext";
 
 const Home = async () => {
   const allCookies = await getCookies({ cookies });
@@ -57,7 +58,10 @@ const Home = async () => {
     <div className="font-vazir overflow-x-hidden">
       <Navbar />
       <Hero />
-      <Map />
+      <MapContextConatiner>
+        <Map />
+      </MapContextConatiner>
+
       <ProductTypes />
       <Brands />
       <Suspense key={1} fallback={<TrendSkeleton />}>
