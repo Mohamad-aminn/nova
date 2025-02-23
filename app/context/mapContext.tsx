@@ -1,8 +1,36 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
-import { toast } from "react-toastify";
+import React, { createContext, Dispatch, useContext, useState } from "react";
+import { Id, toast } from "react-toastify";
 
-const MapContext = createContext({});
+type context = {
+  location: { lat: number; lng: number };
+  setLocation: React.Dispatch<
+    React.SetStateAction<{
+      lat: number;
+      lng: number;
+    }>
+  >;
+  getLocation: () => Promise<Id | undefined>;
+  address: {
+    state: string;
+    city: string;
+    formattedAddress: string;
+  };
+};
+
+const MapContext = createContext<context>({
+  address: {
+    city: "",
+    formattedAddress: "",
+    state: "",
+  },
+  getLocation: async () => {
+    return "";
+  },
+  location: { lat: 0, lng: 0 },
+  setLocation: () => {},
+});
+
 export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
   const [address, setAddress] = useState({
     state: "",
@@ -13,9 +41,12 @@ export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
 
   const getLocation = async () => {
     try {
+      const myHeader = new Headers();
+      myHeader.append("Api-Key", "service.1ca06931c21c4de985a8b6964fb10ae2");
+
       const res = await fetch(
         `https://api.neshan.org/v5/reverse?lat=${location.lat}&lng=${location.lng}`,
-        { headers: { "Api-Key": process.env.NESHAN_API_KEY! } }
+        { headers: myHeader }
       );
       const result = await res.json();
 
@@ -31,6 +62,7 @@ export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
         state: result.state,
         formattedAddress: result.formatted_address,
       });
+      console.log(result);
     } catch (error) {
       if (typeof error === "string") {
         return toast.error(error);
