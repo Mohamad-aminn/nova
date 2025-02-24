@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Marker, useMap, useMapEvents } from "react-leaflet";
 import { FaLocationCrosshairs } from "react-icons/fa6";
-import { useLocation } from "../context/mapContext";
+import { useLocation } from "../../context/mapContext";
 
 const MapEvent = () => {
   const { setLocation } = useLocation();

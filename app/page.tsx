@@ -13,17 +13,13 @@ import { products, users } from "./db/schema";
 import { deleteCookie, getCookie, getCookies } from "cookies-next";
 import { cookies } from "next/headers";
 import NavigationBar from "./components/NavigationBar";
-import { verify } from "jsonwebtoken";
-import dynamic from "next/dynamic";
-import Map from "@/app/components/Map";
+import Map from "@/app/components/map/Map";
 import { MapContextConatiner } from "./context/mapContext";
+import AddressForm from "./components/AddressForm";
 
 const Home = async () => {
   const allCookies = await getCookies({ cookies });
   console.log(allCookies);
-
-  const jwt = await getCookie("access_token", { cookies });
-
   // const { data } = await axios.post(
   //   "https://sandbox.zarinpal.com/pg/v4/payment/request.json",
   //   {
@@ -59,6 +55,7 @@ const Home = async () => {
       <Navbar />
       <Hero />
       <MapContextConatiner>
+        <AddressForm />
         <Map />
       </MapContextConatiner>
 

@@ -10,6 +10,8 @@ type context = {
       lng: number;
     }>
   >;
+  loading: boolean;
+  step: number | 0 | 1;
   getLocation: () => Promise<Id | undefined>;
   address: {
     state: string;
@@ -19,6 +21,8 @@ type context = {
 };
 
 const MapContext = createContext<context>({
+  loading: false,
+  step: 0,
   address: {
     city: "",
     formattedAddress: "",
@@ -38,9 +42,12 @@ export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
     formattedAddress: "",
   });
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
+  const [loading, setLoading] = useState(false);
+  const [step, setStep] = useState(0);
 
   const getLocation = async () => {
     try {
+      setLoading(true);
       const myHeader = new Headers();
       myHeader.append("Api-Key", "service.1ca06931c21c4de985a8b6964fb10ae2");
 
@@ -69,11 +76,16 @@ export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
       } else {
         return toast.error("مشکلی پیش اومد شرمنده");
       }
+    } finally {
+      setLoading(false);
+      setStep(1);
     }
   };
 
   return (
-    <MapContext value={{ location, setLocation, getLocation, address }}>
+    <MapContext
+      value={{ location, setLocation, getLocation, address, loading, step }}
+    >
       {children}
     </MapContext>
   );
@@ -81,5 +93,8 @@ export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
 
 export const useLocation = () => {
   const data = useContext(MapContext);
+  if (!data) {
+    throw Error("this component dont have access to context!");
+  }
   return data;
 };

@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { TileLayer } from "react-leaflet";
 import MapEvent from "./MapEvent";
 import { FaLocationDot } from "react-icons/fa6";
-import { useLocation } from "../context/mapContext";
+import { useLocation } from "../../context/mapContext";
 
 // import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 
