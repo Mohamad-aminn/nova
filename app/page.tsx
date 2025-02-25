@@ -9,7 +9,7 @@ import About from "./components/Home/About";
 import Footer from "./components/Footer";
 import db from "./db/db";
 import { eq } from "drizzle-orm";
-import { products, users } from "./db/schema";
+import { cities, products, states, users } from "./db/schema";
 import { deleteCookie, getCookie, getCookies } from "cookies-next";
 import { cookies } from "next/headers";
 import NavigationBar from "./components/NavigationBar";
@@ -19,7 +19,7 @@ import AddressForm from "./components/AddressForm";
 
 const Home = async () => {
   const allCookies = await getCookies({ cookies });
-  console.log(allCookies);
+  // console.log(allCookies);
   // const { data } = await axios.post(
   //   "https://sandbox.zarinpal.com/pg/v4/payment/request.json",
   //   {
@@ -47,9 +47,18 @@ const Home = async () => {
     where: eq(users.phone_number, "09201370140"),
   });
   const productss = await db.query.products.findMany();
+  console.log(await db.query.cities.findMany());
+  // console.log(await db.query.states.findMany({ with: { cities: true } }));
+  // await db.delete(cities).
+  // await db
+  //   .insert(states)
+  //   .values({
+  //     stateId: 3,
+  //   })
+  //   .then(() => console.log("done"));
 
-  console.log(productss);
-  console.log(user);
+  // console.log(productss);
+  // console.log(user);
   return (
     <div className="font-vazir overflow-x-hidden">
       <Navbar />
