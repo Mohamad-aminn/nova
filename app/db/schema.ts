@@ -66,14 +66,14 @@ export const statesRelation = relations(states, ({ many }) => ({
 }));
 
 export const cities = pgTable("cities", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  stateId: integer("state_id"),
-  name: integer(),
+  id: integer().primaryKey(),
+  state_id: integer(),
+  name: varchar(),
 });
 
 export const citiesRelations = relations(cities, ({ one }) => ({
   stateId: one(states, {
-    fields: [cities.stateId],
+    fields: [cities.state_id],
     references: [states.stateId],
   }),
   // items: many(products),

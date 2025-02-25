@@ -47,7 +47,7 @@ const Home = async () => {
     where: eq(users.phone_number, "09201370140"),
   });
   const productss = await db.query.products.findMany();
-  console.log(await db.query.cities.findMany());
+
   // console.log(await db.query.states.findMany({ with: { cities: true } }));
   // await db.delete(cities).
   // await db

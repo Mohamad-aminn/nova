@@ -1,5 +1,12 @@
 "use client";
-import React, { createContext, Dispatch, useContext, useState } from "react";
+import React, {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Id, toast } from "react-toastify";
 
 type context = {
@@ -16,8 +23,17 @@ type context = {
   address: {
     state: string;
     city: string;
-    formattedAddress: string;
+    neighbourhood: string;
+    fullAddress: string;
   };
+  setAddress: Dispatch<
+    SetStateAction<{
+      state: string;
+      city: string;
+      neighbourhood: string;
+      fullAddress: string;
+    }>
+  >;
 };
 
 const MapContext = createContext<context>({
@@ -25,12 +41,14 @@ const MapContext = createContext<context>({
   step: 0,
   address: {
     city: "",
-    formattedAddress: "",
+    neighbourhood: "",
+    fullAddress: "",
     state: "",
   },
   getLocation: async () => {
     return "";
   },
+  setAddress: () => {},
   location: { lat: 0, lng: 0 },
   setLocation: () => {},
 });
@@ -39,11 +57,16 @@ export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
   const [address, setAddress] = useState({
     state: "",
     city: "",
-    formattedAddress: "",
+    neighbourhood: "",
+    fullAddress: "",
   });
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    console.log(address);
+  }, [address]);
 
   const getLocation = async () => {
     try {
@@ -66,10 +89,10 @@ export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
 
       setAddress({
         city: result.city,
-        state: result.state,
-        formattedAddress: result.formatted_address,
+        state: result.state.replace("استان", ""),
+        neighbourhood: result.neighbourhood,
+        fullAddress: result.formatted_address,
       });
-      console.log(result);
     } catch (error) {
       if (typeof error === "string") {
         return toast.error(error);
@@ -84,7 +107,15 @@ export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
 
   return (
     <MapContext
-      value={{ location, setLocation, getLocation, address, loading, step }}
+      value={{
+        location,
+        setLocation,
+        getLocation,
+        address,
+        loading,
+        step,
+        setAddress,
+      }}
     >
       {children}
     </MapContext>
