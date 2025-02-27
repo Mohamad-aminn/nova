@@ -4,6 +4,7 @@ import { getCookie, getCookies } from "cookies-next";
 import { and, inArray } from "drizzle-orm";
 import { cookies } from "next/headers";
 import React from "react";
+import CartTable from "./components/CartTable";
 
 const page = async () => {
   console.log(await getCookies({ cookies }));
@@ -17,7 +18,9 @@ const page = async () => {
     .where(and(inArray(products.id, cartIds)));
 
   return (
-    <div className=" w-full overflow-scroll min-h-dvh bg-slate-500">
+    <div className=" w-full overflow-scroll min-h-dvh">
+      <CartTable userCart={userCartItems} cartIds={cartIds} />
+
       {userCartItems?.map((item, i) => (
         <div key={i}>
           <div>{item.title}</div>

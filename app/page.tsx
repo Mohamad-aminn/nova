@@ -19,7 +19,7 @@ import AddressForm from "./components/AddressForm";
 
 const Home = async () => {
   const allCookies = await getCookies({ cookies });
-  // console.log(allCookies);
+  console.log(allCookies);
   // const { data } = await axios.post(
   //   "https://sandbox.zarinpal.com/pg/v4/payment/request.json",
   //   {
@@ -63,11 +63,6 @@ const Home = async () => {
     <div className="font-vazir overflow-x-hidden">
       <Navbar />
       <Hero />
-      <MapContextConatiner>
-        <AddressForm />
-        <Map />
-      </MapContextConatiner>
-
       <ProductTypes />
       <Brands />
       <Suspense key={1} fallback={<TrendSkeleton />}>

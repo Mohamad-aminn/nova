@@ -45,6 +45,18 @@ const AddressForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    // forced to write this for typescript error
+    if (
+      name !== "state" ||
+      "city" ||
+      "neighbourhood" ||
+      "fullAddress" ||
+      "houseNumber" ||
+      "residentialUnit"
+    ) {
+      return false;
+    }
+
     setAddress((prev) => ({
       ...prev,
       [name]: value,

@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import { Id, toast } from "react-toastify";
+import Address from "../(DASHBOARD)/dashboard/components/Address";
 
 type context = {
   location: { lat: number; lng: number };
@@ -117,7 +118,7 @@ export const MapContextConatiner = ({ children }: React.PropsWithChildren) => {
         setAddress,
       }}
     >
-      {children}
+      <Address />
     </MapContext>
   );
 };
