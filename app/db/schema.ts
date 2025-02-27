@@ -15,7 +15,7 @@ export const users = pgTable("users", {
   phone_number: varchar({ length: 11 }).unique(),
   otp_code: varchar({ length: 10 }),
   otp_expiration: timestamp(),
-
+  cart: integer(),
   role: varchar({ enum: ["user", "employee", "admin"] })
     .default("user")
     .notNull(),
@@ -23,8 +23,19 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at", { mode: "string" }),
 });
 
-export const userRelations = relations(users, ({ many }) => ({
+export const carts = pgTable("carts", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity().unique(),
+  buyerId: integer("buyer_id").references(() => users.id),
+  products: integer().array(),
+});
+
+export const cartsRelation = relations(carts, ({ one }) => ({
+  user: one(users, { fields: [carts.buyerId], references: [users.id] }),
+}));
+
+export const userRelations = relations(users, ({ many, one }) => ({
   purchases: many(purchases),
+  cart: one(carts),
 }));
 
 export const products = pgTable("products", {
