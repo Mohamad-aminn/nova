@@ -12,7 +12,10 @@ export const middleware = async (req: NextRequest) => {
 
   //  auth user here or in dashboard ??
   if (req.nextUrl.pathname.startsWith("/dashboard")) {
-    if (!jwt) return NextResponse.redirect(new URL("/login", req.url));
+    if (!jwt)
+      return NextResponse.redirect(
+        new URL(`/login?callback=${req.nextUrl.pathname}`, req.url)
+      );
 
     const auth = await jwtVerify(jwt, secret);
 

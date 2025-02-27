@@ -21,13 +21,6 @@ const page = async () => {
     <div className=" w-full overflow-scroll min-h-dvh">
       <CartTable userCart={userCartItems} cartIds={cartIds} />
 
-      {userCartItems?.map((item, i) => (
-        <div key={i}>
-          <div>{item.title}</div>
-          <div>تعداد: {cartIds.filter((n) => n === item.id).length}</div>
-        </div>
-      ))}
-
       <div>dokme kharid ba function + map + form address </div>
     </div>
   );

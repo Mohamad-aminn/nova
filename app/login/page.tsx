@@ -7,7 +7,7 @@ import { OtpInput } from "reactjs-otp-input";
 import { findUser } from "../actions/user";
 import { loginSchema, phoneSchema } from "../schema/user";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { deleteCookie, setCookie } from "cookies-next";
 import { jwtDecode } from "jwt-decode";
 
@@ -59,6 +59,8 @@ const verifyPhone = async (
 };
 
 const page = () => {
+  const searchParams = useSearchParams();
+
   const [data, setData] = useState({
     phone: "",
     otp: "",
@@ -111,6 +113,10 @@ const page = () => {
         secure: false,
       });
 
+      const callbackUrl = searchParams.get("callback");
+      if (callbackUrl) {
+        return router.push(callbackUrl);
+      }
       router.push("/");
     } catch (error) {
       console.log(error);
