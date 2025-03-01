@@ -1,5 +1,5 @@
 import db from "@/app/db/db";
-import { users } from "@/app/db/schema";
+import { carts, users } from "@/app/db/schema";
 import { phoneSchema } from "@/app/schema/user";
 import { generateOtp } from "@/app/utils/otp";
 import sms from "@/app/utils/sms";
@@ -27,10 +27,15 @@ export const POST = async (req: NextRequest) => {
     }
 
     if (!user) {
-      await db.insert(users).values({
-        phone_number: phone,
-      });
+      const user = await db
+        .insert(users)
+        .values({
+          phone_number: phone,
+        })
+        .returning();
+      await db.insert(carts).values({ buyerId: user[0].id });
     }
+
     const otp = generateOtp();
 
     const expirationDate = new Date();

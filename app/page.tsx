@@ -9,7 +9,7 @@ import About from "./components/Home/About";
 import Footer from "./components/Footer";
 import db from "./db/db";
 import { eq } from "drizzle-orm";
-import { cities, products, states, users } from "./db/schema";
+import { carts, cities, products, states, users } from "./db/schema";
 import { deleteCookie, getCookie, getCookies } from "cookies-next";
 import { cookies } from "next/headers";
 import NavigationBar from "./components/NavigationBar";
@@ -20,6 +20,13 @@ import AddressForm from "./components/AddressForm";
 const Home = async () => {
   const allCookies = await getCookies({ cookies });
   console.log(allCookies);
+
+  console.log(
+    await db.query.users.findFirst({
+      where: eq(users.id, 2),
+      with: { cart: true },
+    })
+  );
   // const { data } = await axios.post(
   //   "https://sandbox.zarinpal.com/pg/v4/payment/request.json",
   //   {

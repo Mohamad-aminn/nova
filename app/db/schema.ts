@@ -26,7 +26,7 @@ export const users = pgTable("users", {
 export const carts = pgTable("carts", {
   id: integer().primaryKey().generatedAlwaysAsIdentity().unique(),
   buyerId: integer("buyer_id").references(() => users.id),
-  products: integer().array(),
+  products: integer().array().default([]),
 });
 
 export const cartsRelation = relations(carts, ({ one }) => ({
@@ -46,7 +46,6 @@ export const products = pgTable("products", {
   title: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 513 }),
   price: integer().notNull(),
-  // buyersId: integer().references(() => users.id),
   createdAt: timestamp("created_at", { mode: "string" }).defaultNow(),
   updatedAt: timestamp("updated_at", { mode: "string" }),
 });
