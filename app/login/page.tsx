@@ -8,7 +8,7 @@ import { findUser } from "../actions/user";
 import { loginSchema, phoneSchema } from "../schema/user";
 import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
-import { deleteCookie, setCookie } from "cookies-next";
+import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import { jwtDecode } from "jwt-decode";
 
 type loginData = {
@@ -105,6 +105,17 @@ const page = () => {
       });
 
       const decodedJwt = jwtDecode(result.access_token);
+
+      const userDetailCookie = await getCookie("userDetails");
+      if (userDetailCookie) {
+        const userDetail = JSON.parse(userDetailCookie);
+        await fetch("http://localhost:3000/api/user/cart", {
+          method: "PUT",
+          body: JSON.stringify({ id: decodedJwt.id, cartIds: userDetail.cart }),
+        });
+
+        await deleteCookie("userDetails");
+      }
 
       setCookie("user", JSON.stringify(decodedJwt), {
         domain: "localhost",
