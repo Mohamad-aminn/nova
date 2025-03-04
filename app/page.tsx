@@ -22,10 +22,10 @@ const Home = async () => {
   console.log(allCookies);
 
   console.log(
-    await db.query.users.findFirst({
-      where: eq(users.id, 2),
-      with: { cart: true },
-    })
+    await db
+      .select()
+      .from(carts)
+      .leftJoin(products, eq(carts.products, products.id))
   );
 
   // const { data } = await axios.post(

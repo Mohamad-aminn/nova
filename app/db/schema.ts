@@ -1,5 +1,11 @@
 import { relations } from "drizzle-orm";
-import { integer, pgTable, timestamp, varchar } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  integer,
+  pgTable,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
 //one to one ex:users and users a user invited another user
 
@@ -52,18 +58,17 @@ export const products = pgTable("products", {
 
 export const purchases = pgTable("purchases", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  verified: boolean().default(false),
+  trackingCode: varchar({ length: 255 }).notNull(),
   buyerId: integer("buyer_id"),
-  // items: integer()
-  //   .array()
-  //   .references(() => products.id),
+  items: integer().references(() => products.id),
 });
 
-export const purchasesRelations = relations(purchases, ({ one }) => ({
+export const purchasesRelations = relations(purchases, ({ one, many }) => ({
   buyer: one(users, {
     fields: [purchases.buyerId],
     references: [users.id],
   }),
-  // items: many(products),
 }));
 
 export const states = pgTable("states", {
